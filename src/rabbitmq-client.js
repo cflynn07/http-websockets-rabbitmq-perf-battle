@@ -59,7 +59,7 @@ class RabbitMQClient extends Base {
         queueServerResponse.subscribe((message) => {
           console.log('received message from server', message, count)
           count++
-          if (count < 1000) {
+          if (count < limit) {
             this._sendMessage()
           } else {
             let totalTime = new Date() - start

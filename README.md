@@ -11,9 +11,9 @@ Facilitator | Environment                                             | Payload 
 ------------|---------------------------------------------------------|--------------|------------|----
 RabbitMQ    | local (producer/consumer same host)                     | 1kb          | No         | 
 RabbitMQ    | local (producer/consumer same host)                     | 1kb          | Yes        | 
-RabbitMQ    | EC2 (producer/consumer separate server same N.Virginia) | 1kb          | No         | 
-RabbitMQ    | EC2 (producer/consumer separate server same N.Virginia) | 1kb          | Yes        | 
+RabbitMQ    | EC2 (producer/consumer separate EC2 servers  N. VA)     | 1kb          | No         | 
+RabbitMQ    | EC2 (producer/consumer separate EC2 servers  N. VA)     | 1kb          | Yes        | 
 HTTP        | local (producer/consumer same host)                     | 1kb          | *N/A*      | 
-HTTP        | EC2 (producer/consumer separate server same N.Virginia) | 1kb          | *N/A*      | 
+HTTP        | EC2 (producer/consumer separate EC2 servers  N. VA)     | 1kb          | *N/A*      | 
 Web Sockets | local (producer/consumer same host)                     | 1kb          | *N/A*      | 
-Web Sockets | EC2 (producer/consumer separate server same N.Virginia) | 1kb          | *N/A*      | 
+Web Sockets | EC2 (producer/consumer separate EC2 servers  N. VA)     | 1kb          | *N/A*      | 

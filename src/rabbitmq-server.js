@@ -44,7 +44,10 @@ class RabbitMQServer extends Base {
         })
       },
       (cb) => {
-        this.connection.queue('client-message', { durable: true }, (queue) => {
+        this.connection.queue('client-message', {
+          durable: true,
+          autoDelete: false
+        }, (queue) => {
           console.log('queue client-message')
           queueClientMessage = queue
           cb()
@@ -59,8 +62,12 @@ class RabbitMQServer extends Base {
       (cb) => {
         console.log('subscribing to queueClientMessage')
         queueClientMessage.subscribe((message) => {
-          console.log('received message from client', message)
-          exchangeServerToClient.publish('server-to-client', {payload: payload})
+          console.log('received message from client')
+          exchangeServerToClient.publish('server-to-client', {
+            payload: payload
+          }, {
+            deliveryMode: process.env.PB_RABBITMQ_DELIVERY_MODE
+          })
         })
         cb()
       },

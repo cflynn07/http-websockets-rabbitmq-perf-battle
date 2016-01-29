@@ -46,7 +46,10 @@ class RabbitMQClient extends Base {
         })
       },
       (cb) => {
-        this.connection.queue('server-response', { durable: true }, (queue) => {
+        this.connection.queue('server-response', {
+          durable: true,
+          autoDelete: false
+        }, (queue) => {
           console.log('queue server-response')
           queueServerResponse = queue
           cb()
@@ -61,7 +64,7 @@ class RabbitMQClient extends Base {
       (cb) => {
         console.log('subscribing to queueServerResponse')
         queueServerResponse.subscribe((message) => {
-          console.log('received message from server', message, count)
+          console.log('received message from server', count)
           count++
           if (count < limit) {
             this._sendMessage()
@@ -85,6 +88,8 @@ class RabbitMQClient extends Base {
   _sendMessage () {
     exchangeClientToServer.publish('client-to-server', {
       payload: payload
+    }, {
+      deliveryMode: process.env.PB_RABBITMQ_DELIVERY_MODE
     })
   }
 }

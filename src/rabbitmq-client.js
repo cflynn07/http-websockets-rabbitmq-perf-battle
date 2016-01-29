@@ -28,14 +28,18 @@ class RabbitMQClient extends Base {
         })
       },
       (cb) => {
-        this.connection.exchange('client-to-server', {}, (exchange) => {
+        this.connection.exchange('client-to-server', {
+          type: 'direct'
+        }, (exchange) => {
           console.log('client-to-server exchange')
           exchangeClientToServer = exchange
           cb()
         })
       },
       (cb) => {
-        this.connection.exchange('server-to-client', {}, (exchange) => {
+        this.connection.exchange('server-to-client', {
+          type: 'direct'
+        }, (exchange) => {
           console.log('server-to-client exchange')
           exchangeServerToClient = exchange
           cb()

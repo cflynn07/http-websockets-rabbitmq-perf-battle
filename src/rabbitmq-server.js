@@ -7,6 +7,8 @@ const Base = require('./base')
 
 const async = require('async')
 
+const payload = 'a'.repeat(1024) // ~1kb payload
+
 class RabbitMQServer extends Base {
   constructor () {
     super()
@@ -24,14 +26,18 @@ class RabbitMQServer extends Base {
         })
       },
       (cb) => {
-        this.connection.exchange('client-to-server', {}, (exchange) => {
+        this.connection.exchange('client-to-server', {
+          type: 'direct'
+        }, (exchange) => {
           console.log('client-to-server exchange')
           exchangeClientToServer = exchange
           cb()
         })
       },
       (cb) => {
-        this.connection.exchange('server-to-client', {}, (exchange) => {
+        this.connection.exchange('server-to-client', {
+          type: 'direct'
+        }, (exchange) => {
           console.log('server-to-client exchange')
           exchangeServerToClient = exchange
           cb()
@@ -54,7 +60,7 @@ class RabbitMQServer extends Base {
         console.log('subscribing to queueClientMessage')
         queueClientMessage.subscribe((message) => {
           console.log('received message from client', message)
-          exchangeServerToClient.publish('server-to-client', {from: 'server'})
+          exchangeServerToClient.publish('server-to-client', {payload: payload})
         })
         cb()
       },

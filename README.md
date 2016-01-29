@@ -13,13 +13,13 @@ $ node ./src/rabbitmq-client.js
 
 Benchmarks
 ----------
-Id | Facilitator | Environment                                             | Payload Size       | Persistent | RTT (avg 5000x)
------------------|---------------------------------------------------------|--------------------|------------|----------------
-1  | RabbitMQ    | local (producer/consumer same host)                     | 1kb (send/recieve) | No         | 2.2074 ms
-2  | RabbitMQ    | local (producer/consumer same host)                     | 1kb (send/recieve) | Yes        | 
-3  | RabbitMQ    | EC2 (producer/consumer separate EC2 servers  N. VA)     | 1kb (send/recieve) | No         | 
-4  | RabbitMQ    | EC2 (producer/consumer separate EC2 servers  N. VA)     | 1kb (send/recieve) | Yes        | 
-5  | HTTP        | local (producer/consumer same host)                     | 1kb (send/recieve) | *N/A*      | 
-6  | HTTP        | EC2 (producer/consumer separate EC2 servers  N. VA)     | 1kb (send/recieve) | *N/A*      | 
-7  | Web Sockets | local (producer/consumer same host)                     | 1kb (send/recieve) | *N/A*      | 
-8  | Web Sockets | EC2 (producer/consumer separate EC2 servers  N. VA)     | 1kb (send/recieve) | *N/A*      | 
+Id | Facilitator | Environment | Payload Size | Persistent | RTT (avg. 5000x)
+---|-------------|-------------|--------------|------------|-----------------
+1  | RabbitMQ    | local       | 1kb          | No         | 2.2074 ms
+2  | RabbitMQ    | local       | 1kb          | Yes        | 
+3  | RabbitMQ    | EC2         | 1kb          | No         |
+4  | RabbitMQ    | EC2         | 1kb          | Yes        | 
+5  | HTTP        | local       | 1kb          | *N/A*      | 
+6  | HTTP        | EC2         | 1kb          | *N/A*      | 
+7  | Web Sockets | local       | 1kb          | *N/A*      | 
+8  | Web Sockets | EC2         | 1kb          | *N/A*      | 

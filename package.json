@@ -1,0 +1,11 @@
+{
+  "name": "http-websockets-rabbitmq-perf-battle",
+  "version": "0.0.0",
+  "description": "A fairly unscientific project to benchmark the performance of inter-service communication with HTTP, websockets, and the RabbitMQ message queue",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Casey Flynn <cflynn.us@gmail.com>",
+  "license": "MIT"
+}

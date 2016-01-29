@@ -29,6 +29,8 @@
   },
   "dependencies": {
     "amqp": "^0.2.4",
+    "async": "^1.5.2",
+    "loadenv": "^2.1.0",
     "request": "^2.69.0",
     "socket.io": "^1.4.5",
     "socket.io-client": "^1.4.5"

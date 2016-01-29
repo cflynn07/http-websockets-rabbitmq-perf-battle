@@ -1,3 +1,4 @@
+*.dump
 *.log
 .DS_Store
 .idea/

@@ -51,8 +51,43 @@ $ PB_RABBITMQ_DELIVERY_MODE=2 node ./src/rabbitmq-client.js
 #### 3 - RabbitMQ, EC2, non-persistent
 ```bash
 # Separate EC2 hosts
-$ PB_RABBITMQ_DELIVERY_MODE=1 PB_RABBITMQ_HOST=ip-***-***-***-***.us-west-2.compute.internal /usr/local/n/versions/node/5.4.1/bin/node src/rabbitmq-server.js
-$ PB_RABBITMQ_DELIVERY_MODE=1 PB_RABBITMQ_HOST=ip-***-***-***-***.us-west-2.compute.internal /usr/local/n/versions/node/5.4.1/bin/node src/rabbitmq-client.js
+$ PB_RABBITMQ_DELIVERY_MODE=1 PB_RABBITMQ_USERNAME=example-user PB_RABBITMQ_PASSWORD=example-password PB_RABBITMQ_HOST=ip-***-***-***-***.us-west-2.compute.internal /usr/local/n/versions/node/5.4.1/bin/node src/rabbitmq-server.js
+$ PB_RABBITMQ_DELIVERY_MODE=1 PB_RABBITMQ_USERNAME=example-user PB_RABBITMQ_PASSWORD=example-password PB_RABBITMQ_HOST=ip-***-***-***-***.us-west-2.compute.internal /usr/local/n/versions/node/5.4.1/bin/node src/rabbitmq-client.js
+```
+
+#### 4 - RabbitMQ, EC2, persistent
+```bash
+# Separate EC2 hosts
+$ PB_RABBITMQ_DELIVERY_MODE=2 PB_RABBITMQ_USERNAME=example-user PB_RABBITMQ_PASSWORD=example-password PB_RABBITMQ_HOST=ip-***-***-***-***.us-west-2.compute.internal /usr/local/n/versions/node/5.4.1/bin/node src/rabbitmq-server.js
+$ PB_RABBITMQ_DELIVERY_MODE=2 PB_RABBITMQ_USERNAME=example-user PB_RABBITMQ_PASSWORD=example-password PB_RABBITMQ_HOST=ip-***-***-***-***.us-west-2.compute.internal /usr/local/n/versions/node/5.4.1/bin/node src/rabbitmq-client.js
+```
+
+#### 5 - RabbitMQ, EC2, non-persistent, 100kb payload
+```bash
+# Separate EC2 hosts
+$ PB_PAYLOAD_BYTES=102400 PB_RABBITMQ_DELIVERY_MODE=1 PB_RABBITMQ_USERNAME=example-user PB_RABBITMQ_PASSWORD=example-password PB_RABBITMQ_HOST=ip-***-***-***-***.us-west-2.compute.internal /usr/local/n/versions/node/5.4.1/bin/node src/rabbitmq-server.js
+$ PB_PAYLOAD_BYTES=102400 PB_RABBITMQ_DELIVERY_MODE=1 PB_RABBITMQ_USERNAME=example-user PB_RABBITMQ_PASSWORD=example-password PB_RABBITMQ_HOST=ip-***-***-***-***.us-west-2.compute.internal /usr/local/n/versions/node/5.4.1/bin/node src/rabbitmq-client.js
+```
+
+#### 6 - RabbitMQ, EC2, persistent, 100kb payload
+```bash
+# Separate EC2 hosts
+$ PB_PAYLOAD_BYTES=102400 PB_RABBITMQ_DELIVERY_MODE=2 PB_RABBITMQ_USERNAME=example-user PB_RABBITMQ_PASSWORD=example-password PB_RABBITMQ_HOST=ip-***-***-***-***.us-west-2.compute.internal /usr/local/n/versions/node/5.4.1/bin/node src/rabbitmq-server.js
+$ PB_PAYLOAD_BYTES=102400 PB_RABBITMQ_DELIVERY_MODE=2 PB_RABBITMQ_USERNAME=example-user PB_RABBITMQ_PASSWORD=example-password PB_RABBITMQ_HOST=ip-***-***-***-***.us-west-2.compute.internal /usr/local/n/versions/node/5.4.1/bin/node src/rabbitmq-client.js
+```
+
+#### 7 - RabbitMQ, EC2, non-persistent, 500kb payload
+```bash
+# Separate EC2 hosts
+$ PB_PAYLOAD_BYTES=512000 PB_RABBITMQ_DELIVERY_MODE=1 PB_RABBITMQ_USERNAME=example-user PB_RABBITMQ_PASSWORD=example-password PB_RABBITMQ_HOST=ip-***-***-***-***.us-west-2.compute.internal /usr/local/n/versions/node/5.4.1/bin/node src/rabbitmq-server.js
+$ PB_PAYLOAD_BYTES=512000 PB_RABBITMQ_DELIVERY_MODE=1 PB_RABBITMQ_USERNAME=example-user PB_RABBITMQ_PASSWORD=example-password PB_RABBITMQ_HOST=ip-***-***-***-***.us-west-2.compute.internal /usr/local/n/versions/node/5.4.1/bin/node src/rabbitmq-client.js
+```
+
+#### 8 - RabbitMQ, EC2, persistent, 500kb payload
+```bash
+# Separate EC2 hosts
+$ PB_PAYLOAD_BYTES=512000 PB_RABBITMQ_DELIVERY_MODE=2 PB_RABBITMQ_USERNAME=example-user PB_RABBITMQ_PASSWORD=example-password PB_RABBITMQ_HOST=ip-***-***-***-***.us-west-2.compute.internal /usr/local/n/versions/node/5.4.1/bin/node src/rabbitmq-server.js
+$ PB_PAYLOAD_BYTES=512000 PB_RABBITMQ_DELIVERY_MODE=2 PB_RABBITMQ_USERNAME=example-user PB_RABBITMQ_PASSWORD=example-password PB_RABBITMQ_HOST=ip-***-***-***-***.us-west-2.compute.internal /usr/local/n/versions/node/5.4.1/bin/node src/rabbitmq-client.js
 ```
 
 Benchmarks
@@ -61,9 +96,15 @@ Id | Facilitator | Environment | Payload Size | Persistent | RTT (avg. 5000x)
 ---|-------------|-------------|--------------|------------|-----------------
 1  | RabbitMQ    | local       | 1kb          | No         | 0.7670 ms
 2  | RabbitMQ    | local       | 1kb          | Yes        | 0.8266 ms
-3  | RabbitMQ    | EC2         | 1kb          | No         |
-4  | RabbitMQ    | EC2         | 1kb          | Yes        | 
-5  | HTTP        | local       | 1kb          | *N/A*      | 
-6  | HTTP        | EC2         | 1kb          | *N/A*      | 
-7  | Web Sockets | local       | 1kb          | *N/A*      | 
-8  | Web Sockets | EC2         | 1kb          | *N/A*      | 
+3  | RabbitMQ    | EC2         | 1kb          | No         | 1.7604 ms
+4  | RabbitMQ    | EC2         | 1kb          | Yes        | 1.8120 ms
+5  | RabbitMQ    | EC2         | 100kb        | No         | 7.2426 ms
+6  | RabbitMQ    | EC2         | 100kb        | Yes        | 7.3300 ms
+7  | RabbitMQ    | EC2         | 500kb        | No         | 28.0066 ms
+8  | RabbitMQ    | EC2         | 500kb        | Yes        | 28.0038 ms
+9  | RabbitMQ    | EC2         | 1000kb       | No         | 
+10 | RabbitMQ    | EC2         | 1000kb       | Yes        | 
+11 | HTTP        | local       | 1kb          | *N/A*      | 
+12 | HTTP        | EC2         | 1kb          | *N/A*      | 
+13 | Web Sockets | local       | 1kb          | *N/A*      | 
+14 | Web Sockets | EC2         | 1kb          | *N/A*      | 

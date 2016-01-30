@@ -7,7 +7,7 @@ const Base = require('./base')
 
 const async = require('async')
 
-const payload = 'a'.repeat(1024) // ~1kb payload
+const payload = 'a'.repeat(process.env.PB_PAYLOAD_BYTES) // ~1kb payload
 var exchangeClientToServer
 var exchangeServerToClient
 var queueServerResponse

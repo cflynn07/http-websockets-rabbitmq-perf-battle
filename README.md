@@ -17,6 +17,8 @@ $ wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.5.0/rabbitmq-server-3
 $ sudo rpm -Uvh rabbitmq-server-3.1.1-1.noarch.rpm
 $ sudo rabbitmq-plugins enable rabbitmq_management
 $ rabbitmqctl add_user example-user example-password
+$ rabbitmqctl set_user_tags example-user administrator
+$ rabbitmqctl set_permissions -p / example-user ".*" ".*" ".*"
 ```
 
 #### Install Node.js on Amazon Linux

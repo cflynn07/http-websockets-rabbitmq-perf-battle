@@ -22,10 +22,13 @@ Id | Facilitator | Environment | Payload Size | Persistent | RTT t2.micro | RTT 
 8  | RabbitMQ    | EC2         | 500kb        | Yes        | 28.0038 ms   | 10.2900 ms
 9  | RabbitMQ    | EC2         | 1000kb       | No         |              | 21.3096 ms
 10 | RabbitMQ    | EC2         | 1000kb       | Yes        |              | 21.3126 ms
-11 | HTTP        | local       | 1kb          | *N/A*      | 
-12 | HTTP        | EC2         | 1kb          | *N/A*      | 
-13 | Web Sockets | local       | 1kb          | *N/A*      | 1.3002 ms
-14 | Web Sockets | EC2         | 1kb          | *N/A*      | 
+11 | HTTP        | local       | 1kb          | *N/A*      |              | 
+12 | HTTP        | EC2         | 1kb          | *N/A*      |              | 
+13 | Web Sockets | local       | 1kb          | *N/A*      | 1.3002 ms    | *N/A*
+14 | Web Sockets | EC2         | 1kb          | *N/A*      |              | 1.5238 ms
+15 | Web Sockets | EC2         | 100kb        | *N/A*      |              | 5.9674 ms
+16 | Web Sockets | EC2         | 500kb        | *N/A*      |              | 25.1116 ms
+16 | Web Sockets | EC2         | 1000kb       | *N/A*      |              | 48.1444 ms
 
 Setup Notes
 -----------
@@ -107,4 +110,25 @@ $ PB_PAYLOAD_BYTES=512000 PB_RABBITMQ_DELIVERY_MODE=1 PB_RABBITMQ_USERNAME=examp
 # Separate EC2 hosts
 $ PB_PAYLOAD_BYTES=512000 PB_RABBITMQ_DELIVERY_MODE=2 PB_RABBITMQ_USERNAME=example-user PB_RABBITMQ_PASSWORD=example-password PB_RABBITMQ_HOST=ip-***-***-***-***.us-west-2.compute.internal /usr/local/n/versions/node/5.4.1/bin/node src/rabbitmq-server.js
 $ PB_PAYLOAD_BYTES=512000 PB_RABBITMQ_DELIVERY_MODE=2 PB_RABBITMQ_USERNAME=example-user PB_RABBITMQ_PASSWORD=example-password PB_RABBITMQ_HOST=ip-***-***-***-***.us-west-2.compute.internal /usr/local/n/versions/node/5.4.1/bin/node src/rabbitmq-client.js
+```
+
+#### 14 - Web Sockets, EC2 (t2.micro & m4.xlarge), 1kb payload
+```bash
+$ PB_SERVER_PORT=3000 node src/websocket-server.js
+$ PB_SERVER_HOST=ip-***-***-***-***.us-west-2.compute.internal PB_SERVER_PORT=3000 node src/websocket-client.js
+```
+#### 15 - Web Sockets, EC2 (t2.micro & m4.xlarge), 100kb payload
+```bash
+$ PB_SERVER_PORT=3000 node src/websocket-server.js
+$ PB_PAYLOAD_BYTES=102400 PB_SERVER_HOST=ip-***-***-***-***.us-west-2.compute.internal PB_SERVER_PORT=3000 node src/websocket-client.js
+```
+#### 16 - Web Sockets, EC2 (t2.micro & m4.xlarge), 500kb payload
+```bash
+$ PB_SERVER_PORT=3000 node src/websocket-server.js
+$ PB_PAYLOAD_BYTES=512000 PB_SERVER_HOST=ip-***-***-***-***.us-west-2.compute.internal PB_SERVER_PORT=3000 node src/websocket-client.js
+```
+#### 17 - Web Sockets, EC2 (t2.micro & m4.xlarge), 1000kb payload
+```bash
+$ PB_SERVER_PORT=3000 node src/websocket-server.js
+$ PB_PAYLOAD_BYTES=1024000 PB_SERVER_HOST=ip-***-***-***-***.us-west-2.compute.internal PB_SERVER_PORT=3000 node src/websocket-client.js
 ```

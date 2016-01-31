@@ -24,7 +24,7 @@ Id | Facilitator | Environment | Payload Size | Persistent | RTT t2.micro | RTT 
 10 | RabbitMQ    | EC2         | 1000kb       | Yes        |              | 21.3126 ms
 11 | HTTP        | local       | 1kb          | *N/A*      | 
 12 | HTTP        | EC2         | 1kb          | *N/A*      | 
-13 | Web Sockets | local       | 1kb          | *N/A*      | 
+13 | Web Sockets | local       | 1kb          | *N/A*      | 1.3002 ms
 14 | Web Sockets | EC2         | 1kb          | *N/A*      | 
 
 Setup Notes

@@ -16,8 +16,11 @@ class WebsocketClient extends Base {
   constructor () {
     super()
     this._initWebsocketClient()
-    start = new Date()
-    this._sendMessage()
+    this._ws.on('connect', () => {
+      start = new Date()
+      console.log('connect')
+      this._sendMessage()
+    })
   }
 
   _sendMessage () {

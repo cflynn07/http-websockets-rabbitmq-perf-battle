@@ -6,9 +6,24 @@
 require('loadenv')()
 
 const amqp = require('amqp')
+const ioClient = require('socket.io-client')
+const ioServer = require('socket.io')
 
 class Base {
   constructor () {}
+
+  _initWebsocketClient () {
+    this._ws = ioClient([
+      'ws://',
+      process.env.PB_SERVER_HOST,
+      ':',
+      process.env.PB_SERVER_PORT
+    ].join(''))
+  }
+
+  _initWebsocketServer () {
+    this._wss = ioServer(process.env.PB_SERVER_PORT)
+  }
 
   rabbitMQConnect () {
     this.connection = amqp.createConnection({
